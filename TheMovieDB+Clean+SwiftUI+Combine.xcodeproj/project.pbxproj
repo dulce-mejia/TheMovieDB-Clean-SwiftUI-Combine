@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		836BF7C128A18ADC0019645F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836BF7C028A18ADC0019645F /* Movie.swift */; };
 		83962227289FF8980054D28B /* TheMovieDB_Clean_SwiftUI_CombineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83962226289FF8980054D28B /* TheMovieDB_Clean_SwiftUI_CombineApp.swift */; };
 		83962229289FF8980054D28B /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83962228289FF8980054D28B /* FeedView.swift */; };
 		8396222B289FF8990054D28B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8396222A289FF8990054D28B /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		836BF7C028A18ADC0019645F /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		83962223289FF8980054D28B /* TheMovieDB+Clean+SwiftUI+Combine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TheMovieDB+Clean+SwiftUI+Combine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83962226289FF8980054D28B /* TheMovieDB_Clean_SwiftUI_CombineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMovieDB_Clean_SwiftUI_CombineApp.swift; sourceTree = "<group>"; };
 		83962228289FF8980054D28B /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
@@ -32,6 +34,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		836BF7BD28A17AA10019645F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				836BF7BE28A18A3B0019645F /* Feed */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		836BF7BE28A18A3B0019645F /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				836BF7BF28A18ABB0019645F /* Models */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		836BF7BF28A18ABB0019645F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				836BF7C028A18ADC0019645F /* Movie.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		8396221A289FF8980054D28B = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +77,7 @@
 		83962225289FF8980054D28B /* TheMovieDB+Clean+SwiftUI+Combine */ = {
 			isa = PBXGroup;
 			children = (
+				836BF7BD28A17AA10019645F /* Domain */,
 				83962234289FFBB30054D28B /* Core */,
 				83962238289FFC090054D28B /* UI */,
 				83962239289FFC240054D28B /* Resources */,
@@ -171,6 +198,7 @@
 			files = (
 				83962229289FF8980054D28B /* FeedView.swift in Sources */,
 				83962227289FF8980054D28B /* TheMovieDB_Clean_SwiftUI_CombineApp.swift in Sources */,
+				836BF7C128A18ADC0019645F /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
