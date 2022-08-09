@@ -12,9 +12,6 @@ public protocol Endpoint {
     var queryItems: [String: String] { get }
 }
 extension Endpoint {
-    private var apiVersion: String {
-        "/3"
-    }
     
     private var base: String {
         "https://api.themoviedb.org"
@@ -45,7 +42,7 @@ extension Endpoint {
     }
     
     var urlComponents: URLComponents? {
-        guard let components = URLComponents(string: base+apiVersion) else { return nil }
+        guard let components = URLComponents(string: base) else { return nil }
         var newComponents = components
         newComponents.path = path
         let apiKeyParameter = URLQueryItem(name: apiKey, value: apiKeyValue)

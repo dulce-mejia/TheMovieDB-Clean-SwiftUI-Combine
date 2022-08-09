@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct TheMovieDB_Clean_SwiftUI_CombineApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            FeedView()
+            ContentView()
         }
     }
 }

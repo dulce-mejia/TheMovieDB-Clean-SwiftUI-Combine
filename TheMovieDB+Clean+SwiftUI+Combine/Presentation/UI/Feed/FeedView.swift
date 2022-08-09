@@ -8,15 +8,13 @@
 import SwiftUI
 
 struct FeedView: View {
+    @StateObject var viewModel = FeedViewModel(feedLoader: RemoteFeedLoader(client: URLSessionHTTPClient(session: URLSession(configuration: .default))))
     var body: some View {
         NavigationView {
-            
+            Text("Hola Mundo!")
+                .task {
+                    await viewModel.loadFeed()
+                }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedView()
     }
 }

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol FeedLoader {
-    func loadFeed(_ feedType: FeedType) async throws -> [Movie]
+    func loadFeed(_ feedType: FeedEndpoint) async throws -> [Movie]
 }

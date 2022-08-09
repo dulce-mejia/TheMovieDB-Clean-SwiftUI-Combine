@@ -14,11 +14,10 @@ final class RemoteFeedLoader: FeedLoader {
         self.client = client
     }
     
-    func loadFeed(_ feedType: FeedType) async throws -> [Movie] {
+    func loadFeed(_ feedType: FeedEndpoint) async throws -> [Movie] {
         guard let url = feedType.urlComponents?.url else {
             throw APIError.badUrl
         }
-        
         let requestResult = try await client.get(from: url)
         
         guard let (data, _) = try? requestResult.get() else {
@@ -28,11 +27,10 @@ final class RemoteFeedLoader: FeedLoader {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        guard let result = try? decoder.decode([MovieDTO].self, from: data) else {
+        guard let result = try? decoder.decode(GenericResultDTO<MovieDTO>.self, from: data) else {
             throw APIError.decodingError
         }
-        
-        return result.map { Movie(id: $0.id,
+        return result.results.map { Movie(id: $0.id,
                                   backdropPath: $0.backdropPath,
                                   voteCount: $0.voteCount,
                                   originalTitle: $0.originalTitle,

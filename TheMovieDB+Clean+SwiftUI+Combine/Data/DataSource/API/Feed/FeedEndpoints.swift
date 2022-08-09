@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum FeedType: Int, CaseIterable, Endpoint {
+public enum FeedEndpoint: Int, Endpoint {
     case nowPlaying
     case trending
     case popular
@@ -17,15 +17,15 @@ public enum FeedType: Int, CaseIterable, Endpoint {
     public var path: String {
         switch self {
         case .nowPlaying:
-            return "/movie/now_playing"
+            return "/3/movie/now_playing"
         case .trending:
-            return "/trending/movie/day"
+            return "/3/trending/movie/day"
         case .popular:
-            return "/movie/popular"
+            return "/3/movie/popular"
         case .topRated:
-            return "/movie/top_rated"
+            return "/3/movie/top_rated"
         case .upcoming:
-            return "/movie/upcoming"
+            return "/3/movie/upcoming"
         }
     }
 }
