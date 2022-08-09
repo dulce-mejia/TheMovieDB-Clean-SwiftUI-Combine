@@ -8,9 +8,12 @@
 import Foundation
 import Combine
 
+@MainActor
 final class FeedViewModel: ObservableObject {
     
     let feedLoader: FeedLoader
+    @Published var movies: [Movie] = []
+    
     init(feedLoader: FeedLoader) {
         self.feedLoader = feedLoader
     }
@@ -23,17 +26,14 @@ final class FeedViewModel: ObservableObject {
         case upcoming
     }
     
-    public func loadFeed() async -> [Movie] {
+    public func loadFeed() async {
         do {
             let movies = try await feedLoader.loadFeed(.popular)
-            print("Movies: ", movies)
-            return movies
+            self.movies = movies
         } catch(let error as APIError) {
             print("error en loadFeed: \(error.localizedDescription)")
-            return []
         } catch (let error) {
             print("another error ocurred: ", error.localizedDescription)
-            return []
         }
     }
     

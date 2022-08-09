@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct FeedView: View {
-    @StateObject var viewModel = FeedViewModel(feedLoader: RemoteFeedLoader(client: URLSessionHTTPClient(session: URLSession(configuration: .default))))
+    @StateObject var viewModel: FeedViewModel
+    
     var body: some View {
         NavigationView {
-            Text("Hola Mundo!")
-                .task {
-                    await viewModel.loadFeed()
+            List(viewModel.movies, id: \.id) { movie in
+                VStack {
+                    Text(movie.title ?? "")
+                    Text(movie.releaseDate ?? "")
                 }
+            }
+            .task {
+                await viewModel.loadFeed()
+            }
         }
     }
 }
