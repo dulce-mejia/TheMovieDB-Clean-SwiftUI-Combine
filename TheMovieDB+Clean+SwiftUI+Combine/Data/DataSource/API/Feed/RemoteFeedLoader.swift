@@ -8,18 +8,21 @@
 import Foundation
 
 final class RemoteFeedLoader: FeedLoader {
+    let client: HTTPClient
+    
+    init(client: HTTPClient) {
+        self.client = client
+    }
     
     func loadFeed(_ feedType: FeedType) async throws -> [Movie] {
         guard let url = feedType.urlComponents?.url else {
             throw APIError.badUrl
         }
         
-        guard let (data, response) = try? await URLSession.shared.data(from: url) else {
-            throw APIError.requestError
-        }
+        let requestResult = try await client.get(from: url)
         
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw APIError.unexpectedStatusCode
+        guard let (data, _) = try? requestResult.get() else {
+            throw APIError.requestFailed
         }
         
         let decoder = JSONDecoder()

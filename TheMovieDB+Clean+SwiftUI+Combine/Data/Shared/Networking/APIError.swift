@@ -8,5 +8,5 @@
 import Foundation
 
 enum APIError: Error {
-    case badUrl, requestError, decodingError, connectivity, unexpectedStatusCode
+    case badUrl, requestFailed, decodingError, connectivity, unexpectedStatusCode
 }
