@@ -78,6 +78,7 @@
 		83573D9C28A1CE950061177F /* API */ = {
 			isa = PBXGroup;
 			children = (
+				83573DBB28A2E4790061177F /* GenericResultDTO.swift */,
 				83573D9D28A1CE9F0061177F /* Feed */,
 			);
 			path = API;
@@ -123,7 +124,6 @@
 				83573DAA28A1DD9F0061177F /* APIError.swift */,
 				83573DB128A2A77F0061177F /* HTTPClient.swift */,
 				83573DB328A2A9E80061177F /* URLSessionHTTPClient.swift */,
-				83573DBB28A2E4790061177F /* GenericResultDTO.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
