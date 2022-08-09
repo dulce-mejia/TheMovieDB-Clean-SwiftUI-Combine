@@ -100,10 +100,18 @@
 		83573DA728A1D89F0061177F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				83573DAE28A21FBF0061177F /* Networking */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		83573DAE28A21FBF0061177F /* Networking */ = {
+			isa = PBXGroup;
+			children = (
 				83573DA828A1D8B00061177F /* Endpoint.swift */,
 				83573DAA28A1DD9F0061177F /* APIError.swift */,
 			);
-			path = Shared;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		836BF7BD28A17AA10019645F /* Domain */ = {
