@@ -7,18 +7,18 @@
 
 import Foundation
 
-public struct Movie {
-   public let id: Int
-   public let backdropPath: String?
-   public let voteCount: Int
-   public let originalTitle: String
-   public let posterPath: String?
-   public let title: String?
-   public let voteAverage: Double
-   public let releaseDate: String?
-   public let overview: String?
+struct Movie: Identifiable {
+   let id: Int
+   let backdropPath: String?
+   let voteCount: Int
+   let originalTitle: String
+   let posterPath: String?
+   let title: String?
+   let voteAverage: Double
+   let releaseDate: String?
+   let overview: String?
 
-    public init(id: Int,
+    init(id: Int,
                 backdropPath: String?,
                 voteCount: Int,
                 originalTitle: String,
