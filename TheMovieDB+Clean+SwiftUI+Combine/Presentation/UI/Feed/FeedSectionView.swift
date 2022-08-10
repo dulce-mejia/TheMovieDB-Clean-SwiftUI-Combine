@@ -15,10 +15,13 @@ struct FeedSectionView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            Text(viewModel.section.sectionTitle)
-                .font(.headline)
-                .foregroundColor(.gray)
-                .multilineTextAlignment(.leading)
+            HStack {
+                Text(viewModel.section.sectionTitle)
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHGrid(rows: layout, spacing: 10) {
                     ForEach(viewModel.content) { movie in

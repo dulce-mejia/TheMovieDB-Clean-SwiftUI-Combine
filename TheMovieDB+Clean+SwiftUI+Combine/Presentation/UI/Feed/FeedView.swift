@@ -11,14 +11,17 @@ struct FeedView: View {
     @StateObject var viewModel: FeedViewModel
     
     var body: some View {
-        List {
-            ForEach(viewModel.sections, id: \.section) { section in
-                FeedSectionView(viewModel: section)
+        NavigationView {
+            List {
+                ForEach(viewModel.sections, id: \.section) { section in
+                    FeedSectionView(viewModel: section)
+                }
             }
-        }
-        .listStyle(.plain)
-        .task {
-            await viewModel.loadFeed()
+            .listStyle(.plain)
+            .task {
+                await viewModel.loadFeed()
+            }
+            .navigationTitle("The MovieDB")
         }
     }
 }

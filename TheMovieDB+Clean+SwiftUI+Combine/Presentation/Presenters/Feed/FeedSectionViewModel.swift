@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class FeedSectionViewModel {
+struct FeedSectionViewModel {
     let section: FeedType
     let content: [Movie]
     
