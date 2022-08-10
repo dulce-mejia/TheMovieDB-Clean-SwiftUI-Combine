@@ -22,11 +22,9 @@ struct MovieView: View {
             } placeholder: {
                 ZStack {
                     ProgressView()
-                    Image("no-image")
-                        .resizable()
-                        .frame(height: 175)
-                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(.purple)
                 }
+                .frame(height: 175)
             }
             Text(viewModel.movie.title ?? "")
                 .font(.body)
