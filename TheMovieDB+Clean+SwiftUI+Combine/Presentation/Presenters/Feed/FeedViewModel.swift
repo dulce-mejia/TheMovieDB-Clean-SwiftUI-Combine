@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 
-@MainActor
 final class FeedViewModel: ObservableObject {
     
     let feedLoader: FeedLoader
@@ -26,7 +25,7 @@ final class FeedViewModel: ObservableObject {
         case upcoming
     }
     
-    public func loadFeed() async {
+    @MainActor public func loadFeed() async {
         do {
             let movies = try await feedLoader.loadFeed(.popular)
             self.movies = movies
