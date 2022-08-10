@@ -19,9 +19,14 @@ struct MovieView: View {
             AsyncImage(url: viewModel.imageUrl) { image in
                 image
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
             } placeholder: {
-                ProgressView()
+                ZStack {
+                    ProgressView()
+                    Image("no-image")
+                        .resizable()
+                        .frame(height: 175)
+                        .aspectRatio(contentMode: .fit)
+                }
             }
             Text(viewModel.movie.title ?? "")
                 .font(.body)

@@ -11,29 +11,32 @@ import Combine
 final class FeedViewModel: ObservableObject {
     
     let feedLoader: FeedLoader
-    @Published var movies: [Movie] = []
+    @Published var sections: [FeedSectionViewModel] = []
     
     init(feedLoader: FeedLoader) {
         self.feedLoader = feedLoader
     }
     
-    private enum FeedType: Int, CaseIterable {
-        case nowPlaying
-        case trending
-        case popular
-        case topRated
-        case upcoming
-    }
-    
     @MainActor public func loadFeed() async {
         do {
-            let movies = try await feedLoader.loadFeed(.popular)
-            self.movies = movies
+            async let nowPlaying = getContentBySection(.nowPlaying)
+            async let popular = getContentBySection(.popular)
+            async let trending = getContentBySection(.trending)
+            async let topRated = getContentBySection(.topRated)
+            async let upcoming = getContentBySection(.upcoming)
+            self.sections = try await [nowPlaying, popular, trending, topRated, upcoming]
+            
         } catch(let error as APIError) {
             print("error en loadFeed: \(error.localizedDescription)")
         } catch (let error) {
             print("another error ocurred: ", error.localizedDescription)
         }
+    }
+    
+    private func getContentBySection(_ section: FeedType) async throws -> FeedSectionViewModel {
+        let endpoint = getFeedType(section)
+        let movies = try await feedLoader.loadFeed(endpoint)
+        return FeedSectionViewModel(section: section, content: movies)
     }
     
     private func getFeedType(_ type: FeedType) -> FeedEndpoint {

@@ -9,23 +9,16 @@ import SwiftUI
 
 struct FeedView: View {
     @StateObject var viewModel: FeedViewModel
-    let layout = [
-        GridItem(.adaptive(minimum: 120))
-    ]
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                LazyVGrid(columns: layout, spacing: 10) {
-                    ForEach(viewModel.movies, id: \.id) { movie in
-                        MovieView(movie: movie)
-                    }
-                }
-                .padding(.horizontal)
+        List {
+            ForEach(viewModel.sections, id: \.section) { section in
+                FeedSectionView(viewModel: section)
             }
-            .task {
-                await viewModel.loadFeed()
-            }
+        }
+        .listStyle(.plain)
+        .task {
+            await viewModel.loadFeed()
         }
     }
 }
