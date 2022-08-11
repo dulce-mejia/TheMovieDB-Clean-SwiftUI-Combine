@@ -19,7 +19,12 @@ struct FeedView: View {
             }
             .listStyle(.plain)
             .task {
-                await viewModel.loadFeed()
+                do {
+                    try await viewModel.loadFeedSequence()
+                }
+                catch {
+                    print("error..", error.localizedDescription)
+                }
             }
             .navigationTitle("The MovieDB")
         }

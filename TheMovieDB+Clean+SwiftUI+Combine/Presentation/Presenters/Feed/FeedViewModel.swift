@@ -17,6 +17,7 @@ final class FeedViewModel: ObservableObject {
         self.feedLoader = feedLoader
     }
     
+    // Getting data using Async Binding
     @MainActor public func loadFeed() async {
         do {
             async let nowPlaying = getContentBySection(.nowPlaying)
@@ -30,6 +31,15 @@ final class FeedViewModel: ObservableObject {
             print("error en loadFeed: \(error.localizedDescription)")
         } catch (let error) {
             print("another error ocurred: ", error.localizedDescription)
+        }
+    }
+    
+    // Loading data using AsyncSequence and AsyncIteratorProtocol
+    public func loadFeedSequence() async throws {
+        let sections = FeedType.allCases
+        
+        for try await feedViewModel in FeedSections(feedLoader: feedLoader, sections: sections) {
+            self.sections.append(feedViewModel)
         }
     }
     
