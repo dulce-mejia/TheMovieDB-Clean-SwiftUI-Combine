@@ -68,7 +68,7 @@ public final class URLSessionHTTPClient: HTTPClient {
     }
     
     private func task(request: URLRequest) async throws -> HTTPClient.Result {
-        let (data, response) = try await session.data(for: request)
+        let (data, response) = try await session.data(from: request.url!)
         guard let httpResponse = response as? HTTPURLResponse else {
             throw APIError.requestFailed
         }

@@ -35,7 +35,7 @@ final class FeedViewModel: ObservableObject {
     }
     
     // Loading data using AsyncSequence and AsyncIteratorProtocol
-    public func loadFeedSequence() async throws {
+    @MainActor public func loadFeedSequence() async throws {
         let sections = FeedType.allCases
         
         for try await feedViewModel in FeedSections(feedLoader: feedLoader, sections: sections) {

@@ -12,6 +12,7 @@ struct FeedSectionView: View {
         GridItem(.fixed(175))
     ]
     let viewModel: FeedSectionViewModel
+    let imageLoader: ImageLoader
     
     var body: some View {
         VStack(spacing: 10) {
@@ -25,20 +26,12 @@ struct FeedSectionView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHGrid(rows: layout, spacing: 10) {
                     ForEach(viewModel.content) { movie in
-                        MovieView(movie: movie)
+                        MovieView(movie: movie, imageLoader: imageLoader)
                             .aspectRatio(0.75, contentMode: .fit)
                     }
                 }
             }
         }
         .frame(height: 190)
-    }
-}
-
-struct FeedSection_Previews: PreviewProvider {
-    static let section = FeedSectionViewModel(section: .popular, content: [])
-    static var previews: some View {
-        FeedSectionView(viewModel: section)
-            .previewLayout(.sizeThatFits)
     }
 }

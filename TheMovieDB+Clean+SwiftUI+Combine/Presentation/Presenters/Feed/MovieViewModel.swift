@@ -7,14 +7,16 @@
 
 import Foundation
 
-final class MovieViewModel {
+final class MovieViewModel: ObservableObject {
     let movie: Movie
     private let base = "https://image.tmdb.org/t/p/"
-    private let posterSize: PosterSize
+    private let imageLoader: ImageLoader
+    @Published var imageData: Data?
+    @Published var showDefaultImage: Bool = false
     
-    init(movie: Movie, posterSize: PosterSize = .w342) {
+    init(movie: Movie, imageLoader: ImageLoader) {
         self.movie = movie
-        self.posterSize = posterSize
+        self.imageLoader = imageLoader
     }
     
     enum PosterSize: String {
@@ -23,9 +25,25 @@ final class MovieViewModel {
     
     var imageUrl: URL? {
         guard let path = movie.posterPath,
-              let url = URL(string: base + posterSize.rawValue + path) else {
+              let url = URL(string: base + PosterSize.w342.rawValue + path) else {
             return nil
         }
         return url
+    }
+    
+    func getImageData() async {
+        guard let imageUrl = imageUrl else {
+            showDefaultImage = true
+            return
+        }
+        do {
+            let imageData = try await imageLoader.load(url: imageUrl)
+            DispatchQueue.main.async {
+                self.imageData = imageData
+            }
+        } catch {
+            print("error loading image", error.localizedDescription)
+            showDefaultImage = true
+        }
     }
 }

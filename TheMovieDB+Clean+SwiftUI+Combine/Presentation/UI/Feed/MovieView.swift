@@ -8,28 +8,28 @@
 import SwiftUI
 
 struct MovieView: View {
-    let viewModel: MovieViewModel
+    @StateObject var viewModel: MovieViewModel
     
-    init(movie: Movie) {
-        self.viewModel = MovieViewModel(movie: movie)
+    init(movie: Movie, imageLoader: ImageLoader) {
+        self._viewModel = StateObject(wrappedValue: MovieViewModel(movie: movie, imageLoader: imageLoader))
     }
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            AsyncImage(url: viewModel.imageUrl) { image in
-                image
+            if let data = viewModel.imageData {
+                Image(uiImage: UIImage(data: data) ?? UIImage(named: "no-image")!)
                     .resizable()
-            } placeholder: {
-                ZStack {
+            } else {
+                if viewModel.showDefaultImage {
+                    Image("no-image")
+                        .resizable()
+                } else {
                     ProgressView()
-                        .foregroundColor(.purple)
                 }
-                .frame(height: 175)
             }
             Text(viewModel.movie.title ?? "")
                 .font(.body)
                 .multilineTextAlignment(.center)
-                .bold()
                 .padding(.bottom)
                 .frame(maxWidth: .infinity)
                 .foregroundColor(.white)
@@ -40,21 +40,10 @@ struct MovieView: View {
             RoundedRectangle(cornerRadius: 20)
             .stroke(.black, lineWidth: 1)
         )
-    }
-}
-
-struct MovieView_Previews: PreviewProvider {
-    static let movie = Movie(id: 1,
-                             backdropPath: nil,
-                             voteCount: 3,
-                             originalTitle: "Original",
-                             posterPath: nil,
-                             title: "Title",
-                             voteAverage: 0.5,
-                             releaseDate: "10/12/1998",
-                             overview: "Overview")
-    static var previews: some View {
-        MovieView(movie: movie)
-            .previewLayout(.sizeThatFits)
+        .onAppear{
+            Task {
+                await viewModel.getImageData()
+            }
+        }
     }
 }
