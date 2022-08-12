@@ -76,6 +76,6 @@ public final class URLSessionHTTPClient: HTTPClient {
         guard httpResponse.statusCode == 200 else {
             throw APIError.unexpectedStatusCode
         }
-        return .success((data, response as! HTTPURLResponse))
+        return .success((data, httpResponse))
     }
 }
