@@ -36,6 +36,9 @@
 		83A0E80F28A755A400F59970 /* SimilarMoviesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E80E28A755A400F59970 /* SimilarMoviesEndpoint.swift */; };
 		83A0E81428A75D0400F59970 /* RemoteRecommendedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E81328A75D0400F59970 /* RemoteRecommendedLoader.swift */; };
 		83A0E81628A75D5E00F59970 /* RecommendedEnpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E81528A75D5E00F59970 /* RecommendedEnpoint.swift */; };
+		83A0E81828A75EF600F59970 /* CastEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E81728A75EF600F59970 /* CastEndpoint.swift */; };
+		83A0E81A28A75F2B00F59970 /* RemoteCastLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E81928A75F2B00F59970 /* RemoteCastLoader.swift */; };
+		83A0E81C28A7605C00F59970 /* CastDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E81B28A7605C00F59970 /* CastDTO.swift */; };
 		83FEFFDB28A5BB720080C8B3 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEFFDA28A5BB720080C8B3 /* ImageLoader.swift */; };
 		83FEFFDD28A5BC910080C8B3 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEFFDC28A5BC910080C8B3 /* ImageCache.swift */; };
 		83FEFFE128A5C1910080C8B3 /* RemoteImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEFFE028A5C1910080C8B3 /* RemoteImageLoader.swift */; };
@@ -73,6 +76,9 @@
 		83A0E80E28A755A400F59970 /* SimilarMoviesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarMoviesEndpoint.swift; sourceTree = "<group>"; };
 		83A0E81328A75D0400F59970 /* RemoteRecommendedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRecommendedLoader.swift; sourceTree = "<group>"; };
 		83A0E81528A75D5E00F59970 /* RecommendedEnpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedEnpoint.swift; sourceTree = "<group>"; };
+		83A0E81728A75EF600F59970 /* CastEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastEndpoint.swift; sourceTree = "<group>"; };
+		83A0E81928A75F2B00F59970 /* RemoteCastLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCastLoader.swift; sourceTree = "<group>"; };
+		83A0E81B28A7605C00F59970 /* CastDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastDTO.swift; sourceTree = "<group>"; };
 		83FEFFDA28A5BB720080C8B3 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		83FEFFDC28A5BC910080C8B3 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		83FEFFE028A5C1910080C8B3 /* RemoteImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageLoader.swift; sourceTree = "<group>"; };
@@ -347,6 +353,9 @@
 		83A0E81228A75CEE00F59970 /* Cast */ = {
 			isa = PBXGroup;
 			children = (
+				83A0E81728A75EF600F59970 /* CastEndpoint.swift */,
+				83A0E81928A75F2B00F59970 /* RemoteCastLoader.swift */,
+				83A0E81B28A7605C00F59970 /* CastDTO.swift */,
 			);
 			path = Cast;
 			sourceTree = "<group>";
@@ -456,7 +465,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83A0E81C28A7605C00F59970 /* CastDTO.swift in Sources */,
 				83573DC628A358100061177F /* FeedType.swift in Sources */,
+				83A0E81A28A75F2B00F59970 /* RemoteCastLoader.swift in Sources */,
 				83962229289FF8980054D28B /* FeedView.swift in Sources */,
 				83A0E80F28A755A400F59970 /* SimilarMoviesEndpoint.swift in Sources */,
 				83FEFFDB28A5BB720080C8B3 /* ImageLoader.swift in Sources */,
@@ -481,6 +492,7 @@
 				83A0E80328A72FE200F59970 /* Cast.swift in Sources */,
 				83A0E80D28A754E900F59970 /* RemoteSimilarLoader.swift in Sources */,
 				83573DB228A2A77F0061177F /* HTTPClient.swift in Sources */,
+				83A0E81828A75EF600F59970 /* CastEndpoint.swift in Sources */,
 				83573DBE28A330A20061177F /* MovieView.swift in Sources */,
 				83573DC028A33FF10061177F /* MovieViewModel.swift in Sources */,
 				836BF7C128A18ADC0019645F /* Movie.swift in Sources */,
