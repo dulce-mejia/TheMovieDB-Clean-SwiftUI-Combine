@@ -12,12 +12,18 @@ final class FeedViewModel: ObservableObject {
     
     let feedLoader: FeedLoader
     @Published var sections: [FeedSectionViewModel] = []
+    @Published var showErrorAlert: Bool = false
+    @Published var errorMessage: String = "" {
+        didSet {
+            showErrorAlert = true
+        }
+    }
     
     init(feedLoader: FeedLoader) {
         self.feedLoader = feedLoader
     }
     
-    // Getting data using Async Binding
+    // Getting data using Async let binding
     @MainActor public func loadFeed() async {
         do {
             async let nowPlaying = getContentBySection(.nowPlaying)
@@ -28,18 +34,24 @@ final class FeedViewModel: ObservableObject {
             self.sections = try await [nowPlaying, popular, trending, topRated, upcoming]
             
         } catch(let error as APIError) {
+            errorMessage = error.localizedDescription
             print("error en loadFeed: \(error.localizedDescription)")
         } catch (let error) {
+            errorMessage = error.localizedDescription
             print("another error ocurred: ", error.localizedDescription)
         }
     }
     
     // Loading data using AsyncSequence and AsyncIteratorProtocol
-    @MainActor public func loadFeedSequence() async throws {
+    @MainActor public func loadFeedSequence() async {
         let sections = FeedType.allCases
-        
-        for try await feedViewModel in FeedSections(feedLoader: feedLoader, sections: sections) {
-            self.sections.append(feedViewModel)
+        do {
+            for try await feedViewModel in FeedSections(feedLoader: feedLoader, sections: sections) {
+                self.sections.append(feedViewModel)
+            }
+        } catch(let error) {
+            print("error loading feed......")
+            errorMessage = error.localizedDescription
         }
     }
     

@@ -21,14 +21,12 @@ struct FeedView: View {
                 }
             }
             .listStyle(.plain)
+            .alert(isPresented: $viewModel.showErrorAlert) {
+                Alert(title: Text("Error"), message: Text(viewModel.errorMessage), dismissButton: .default(Text("OK")))
+            }
             .onAppear {
                 Task {
-                    do {
-                        try await viewModel.loadFeedSequence()
-                    }
-                    catch {
-                        print("error..", error.localizedDescription)
-                    }
+                    await viewModel.loadFeedSequence()
                 }
             }
             .navigationTitle("The MovieDB")
