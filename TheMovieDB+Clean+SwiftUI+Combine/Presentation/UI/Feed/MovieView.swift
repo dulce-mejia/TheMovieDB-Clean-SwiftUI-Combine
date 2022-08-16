@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MovieView: View {
     @StateObject var viewModel: MovieViewModel
+    @State var downloadImage: Task<Void, Error>?
     
     init(movie: Movie, imageLoader: ImageLoader) {
         self._viewModel = StateObject(wrappedValue: MovieViewModel(movie: movie, imageLoader: imageLoader))
@@ -41,8 +42,14 @@ struct MovieView: View {
             .stroke(.black, lineWidth: 1)
         )
         .onAppear{
-            Task {
+            downloadImage = Task {
                 await viewModel.getImageData()
+            }
+        }
+        .onDisappear{
+            guard let downloadTask = downloadImage else { return }
+            if !downloadTask.isCancelled {
+                downloadTask.cancel()
             }
         }
     }

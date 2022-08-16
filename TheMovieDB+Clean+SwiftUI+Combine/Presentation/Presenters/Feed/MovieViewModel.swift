@@ -38,12 +38,14 @@ final class MovieViewModel: ObservableObject {
         }
         do {
             let imageData = try await imageLoader.load(url: imageUrl)
-            DispatchQueue.main.async {
+            await MainActor.run {
                 self.imageData = imageData
             }
         } catch {
             print("error loading image", error.localizedDescription)
-            showDefaultImage = true
+            await MainActor.run {
+                showDefaultImage = true
+            }
         }
     }
 }
